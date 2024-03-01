@@ -8,6 +8,7 @@ import MinimalBlogPost from "../components/nobanner-blog-post.component";
 import { activeTabRef } from "../components/inpage-navigation.component";
 import NotDataMessage from "../components/nodata.component";
 import { filterPaginationData } from "../common/filter-pagination-data";
+import LoadMoreDataBtn from "../components/load-more.component";
 
 const HomePage = () => {
   let [blogs, setBlogs] = useState(null);
@@ -28,16 +29,15 @@ const HomePage = () => {
   const fetchlatestBlog = (page = 1) => {
     axios
       .post("http://localhost:3001" + "/latest-blogs", { page })
-      .then( async({ data }) => {
-
+      .then(async ({ data }) => {
         console.log("Data Blog is here", data.blogs);
 
         let formatData = await filterPaginationData({
           state: blogs,
           data: data.blogs,
           page,
-          countRoute:"/all-latest-blogs-count"
-        })
+          counteRoute: "/all-latest-blogs-count",
+        });
         setBlogs(formatData);
         console.log("formated Data", formatData);
       })
@@ -46,11 +46,19 @@ const HomePage = () => {
       });
   };
 
-  const fetcBlogByCategory = () => {
+  const fetcBlogByCategory = ({ page = 1 }) => {
     axios
-      .post("https://snazzy-puffpuff-405ea8.netlify.app/" + "/search-blog", { tag: pageState })
-      .then(({ data }) => {
-        setBlogs(data.blogs);
+      .post("http://localhost:3001" + "/search-blog", { tag: pageState, page })
+      .then(async ({ data }) => {
+        let formatData = await filterPaginationData({
+          state: blogs,
+          data: data.blogs,
+          page,
+          counteRoute: "/search-blog-count",
+          data_to_send: { tag: pageState },
+        });
+        setBlogs(formatData);
+        console.log("formated Data", formatData);
       })
       .catch((error) => {
         console.log(error);
@@ -82,9 +90,9 @@ const HomePage = () => {
   useEffect(() => {
     activeTabRef.current.click();
     if (pageState == "Home") {
-      fetchlatestBlog();
+      fetchlatestBlog({ page: 1 });
     } else {
-      fetcBlogByCategory();
+      fetcBlogByCategory({ page: 1 });
     }
     if (!treningBlogs) {
       fetchTrendingBlog();
@@ -121,6 +129,12 @@ const HomePage = () => {
               ) : (
                 <NotDataMessage message="No Blog Published" />
               )}
+              <LoadMoreDataBtn
+                state={blogs}
+                fetchDataFun={
+                  pageState == "Home" ? fetchlatestBlog : fetcBlogByCategory
+                }
+              />
             </>
             {treningBlogs == null ? (
               <Loader />
@@ -145,7 +159,7 @@ const HomePage = () => {
           <div className=" flex flex-col gap-10">
             <div>
               <h1 className=" font-medium text-xl mb-8">
-                Storise from all interests is here
+                Storise from all interests
               </h1>
 
               <div className=" flex gap-3 flex-wrap">
