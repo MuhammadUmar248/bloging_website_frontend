@@ -30,7 +30,7 @@ const HomePage = () => {
       .post("http://localhost:3001" + "/latest-blogs", { page })
       .then( async({ data }) => {
 
-        console.log("Data Blog", data.blogs);
+        console.log("Data Blog is here", data.blogs);
 
         let formatData = await filterPaginationData({
           state: blogs,
@@ -48,7 +48,7 @@ const HomePage = () => {
 
   const fetcBlogByCategory = () => {
     axios
-      .post("http://localhost:3001" + "/search-blog", { tag: pageState })
+      .post("https://snazzy-puffpuff-405ea8.netlify.app/" + "/search-blog", { tag: pageState })
       .then(({ data }) => {
         setBlogs(data.blogs);
       })
@@ -145,7 +145,7 @@ const HomePage = () => {
           <div className=" flex flex-col gap-10">
             <div>
               <h1 className=" font-medium text-xl mb-8">
-                Storise from all interests
+                Storise from all interests is here
               </h1>
 
               <div className=" flex gap-3 flex-wrap">
