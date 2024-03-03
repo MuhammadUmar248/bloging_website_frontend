@@ -16,14 +16,14 @@ const HomePage = () => {
   let [pageState, setPageState] = useState("Home");
 
   let categories = [
-    "Programing",
-    "Hollywood",
-    "Film Making",
-    "Social Media",
-    "Cooking",
-    "Tech",
-    "Finance",
-    "Travel",
+    "programing",
+    "hollywood",
+    "film Making",
+    "social Media",
+    "cooking",
+    "tech",
+    "finance",
+    "travel",
   ];
 
   const fetchlatestBlog = (page = 1) => {
@@ -132,8 +132,8 @@ const HomePage = () => {
               <LoadMoreDataBtn
                 state={blogs}
                 fetchDataFun={
-                  pageState == "Home" ? fetchlatestBlog : fetcBlogByCategory
-                }
+                  (pageState == "Home" ? fetchlatestBlog : fetcBlogByCategory
+                )}
               />
             </>
             {treningBlogs == null ? (
@@ -144,7 +144,7 @@ const HomePage = () => {
                   <AnimationWraper
                     transition={{ duration: 1, delay: i * 1 }}
                     key={i}
-                  >
+                  > 
                     <MinimalBlogPost blog={blog} index={i} />
                   </AnimationWraper>
                 );
