@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import AnimationWraper from "../common/page-animation";
 import Loader from "../components/loader.component";
 import { UserContext } from "../App";
@@ -43,10 +43,6 @@ const ProfilePage = () => {
     joinedAt,
   } = profile;
 
-  let {
-    userAuth: { username },
-  } = useContext(UserContext);
-
   const fetchUserProfile = () => {
     axios
       .post("http://localhost:3001" + "/get-profile", {
@@ -83,7 +79,6 @@ const ProfilePage = () => {
           data_to_send: { author: user_id },
         });
         formatedData.user_id = user_id;
-        console.log("formated data is here", formatedData);
         setBlogs(formatedData);
       });
   };
@@ -120,23 +115,6 @@ const ProfilePage = () => {
             <h1 className=" text-2xl font-medium">@{profile_username}</h1>
             <p className=" text-xl capitalize h-6">{fullname}</p>
 
-            <p>
-              {total_posts?.toLocaleString()} Blogs -{" "}
-              {total_reads?.toLocaleString()} Reads
-            </p>
-            <div className=" flex gap-4 mt-2">
-              {profileId == username ? (
-                <Link
-                  to="/setting/edit-profile"
-                  className=" btn-light rounded-md"
-                >
-                  {" "}
-                  Edit Profile{" "}
-                </Link>
-              ) : (
-                " "
-              )}
-            </div>
             <AboutUser
               className="max-md:hidden"
               bio={bio}

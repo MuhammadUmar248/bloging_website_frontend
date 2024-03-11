@@ -6,12 +6,15 @@ export default {
         colors: {
             'white': '#FFFFFF',
             'black': '#242424',
-            'grey': '#F3F3F3',
+            'grey': '#9BCF53',
             'dark-grey': '#6B6B6B',
             'red': '#FF4E4E',
             'transparent': 'transparent',
             'twitter': '#1DA1F2',
-            'purple': '#8B46FF'
+            'purple': '#9BCF53',
+            'green' : '#9BCF53',
+            'gre' : '#F3F3F3',
+            'lg':'#BFEA7C',
         },
 
         fontSize: {

@@ -18,8 +18,8 @@ const HomePage = () => {
   let categories = [
     "programing",
     "hollywood",
-    "film Making",
-    "social Media",
+    "film making",
+    "social media",
     "cooking",
     "tech",
     "finance",
@@ -30,8 +30,6 @@ const HomePage = () => {
     axios
       .post("http://localhost:3001" + "/latest-blogs", { page })
       .then(async ({ data }) => {
-        console.log("Data Blog is here", data.blogs);
-
         let formatData = await filterPaginationData({
           state: blogs,
           data: data.blogs,
@@ -39,7 +37,6 @@ const HomePage = () => {
           counteRoute: "/all-latest-blogs-count",
         });
         setBlogs(formatData);
-        console.log("formated Data", formatData);
       })
       .catch((error) => {
         console.log(error);
@@ -58,7 +55,6 @@ const HomePage = () => {
           data_to_send: { tag: pageState },
         });
         setBlogs(formatData);
-        console.log("formated Data", formatData);
       })
       .catch((error) => {
         console.log(error);
@@ -77,8 +73,7 @@ const HomePage = () => {
   };
 
   const loadBlogBCategory = (e) => {
-    let category = e.target.innerText;
-    console.log("sate here", category);
+    let category = e.target.innerText.toLowerCase();
     setBlogs(null);
     if (pageState == category) {
       setPageState("Home");
@@ -99,14 +94,12 @@ const HomePage = () => {
     }
   }, [pageState]);
 
-  // console.log("trending blog", treningBlogs)
-
   return (
     <AnimationWraper>
       <section className="h-cover flex justify-center gap-10">
         <div className="w-full">
           <InPageNavigation
-            routes={[pageState, "Trending Blogs"]}
+            routes={[pageState.toUpperCase(), "Trending Blogs"]}
             defaultHidden={["Trending Blogs"]}
           >
             <>
@@ -132,8 +125,8 @@ const HomePage = () => {
               <LoadMoreDataBtn
                 state={blogs}
                 fetchDataFun={
-                  (pageState == "Home" ? fetchlatestBlog : fetcBlogByCategory
-                )}
+                  pageState == "Home" ? fetchlatestBlog : fetcBlogByCategory
+                }
               />
             </>
             {treningBlogs == null ? (
@@ -144,7 +137,7 @@ const HomePage = () => {
                   <AnimationWraper
                     transition={{ duration: 1, delay: i * 1 }}
                     key={i}
-                  > 
+                  >
                     <MinimalBlogPost blog={blog} index={i} />
                   </AnimationWraper>
                 );
@@ -167,10 +160,9 @@ const HomePage = () => {
                   return (
                     <button
                       onClick={loadBlogBCategory}
-                      className={
-                        "tag" +
-                        (pageState == categery ? " bg-black text-white" : "")
-                      }
+                      className={`tag ${
+                        pageState == categery ? " bg-grey text-black " : " "
+                      }`}
                       key={i}
                     >
                       {categery}
@@ -189,7 +181,7 @@ const HomePage = () => {
                 treningBlogs.map((blog, i) => {
                   return (
                     <AnimationWraper
-                      transition={{ duration: 1, delay: i * 1 }}
+                      transition={{ duration: 1, delay: i * 0.5 }}
                       key={i}
                     >
                       <MinimalBlogPost blog={blog} index={i} />

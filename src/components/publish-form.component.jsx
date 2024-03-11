@@ -122,8 +122,8 @@ const PublishForm = () => {
           <i class="fi fi-br-x"></i>
         </button>
         <div className="max-w-[550px] center ">
-          <p className="text-dark-grey mb-1"> Preview </p>
-          <div className="w-full aspect-video rounded-lg overflow-hidden bg-grey mt-4">
+          <h3 className="text-dark-grey mb-1"> Preview </h3>
+          <div className="w-full aspect-video rounded-lg overflow-hidden bg-grey mt-4 border-grey">
             <img src={banner} />
           </div>
           <h1 className="text-4xl font-medium mt-2 leading-tight line-clamp-2">
@@ -174,8 +174,10 @@ const PublishForm = () => {
           <p className="mt-1 mb-4 text-dark-grey text-right">
             {tagLimit - tags.length} Tags left{" "}
           </p>
-          <button className="btn-dark px-8" onClick={publishBlog}>
+          <button className="btn-light px-8" onClick={publishBlog}>
+            <b>
             Publish Blog
+            </b>
           </button>
         </div>
       </section>

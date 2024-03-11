@@ -15,18 +15,14 @@ const UserAuthForm = ({ type }) => {
     setUserAuth,
   } = useContext(UserContext);
 
-  // console.log(access_token);
-
   const UserAuthThroughServer = (serverRoute, formData) => {
     axios
       .post("http://localhost:3001" + serverRoute, formData)
       .then(({ data }) => {
-        console.log("my data is here !", data);
         storeInSession("user", JSON.stringify(data));
         setUserAuth(data);
       })
       .catch(({ response }) => {
-        console.log("Resonse", response);
         toast.error(response.data.error);
       });
   };
@@ -45,7 +41,6 @@ const UserAuthForm = ({ type }) => {
     for (let [key, value] of form.entries()) {
       formData[key] = value;
     }
-    console.log("form data", formData);
 
     let { fullname, email, password } = formData;
 
@@ -130,9 +125,9 @@ const UserAuthForm = ({ type }) => {
             {type?.replace("-", "")}
           </button>
           <div className="relative w-full flex items-center gap-2 my-10 opacity-10 uppercase text-black font-bold">
-            <hr className="w-1/2 border-black" />
-            <p>or</p>
-            <hr className="w-1/2 border-black" />
+            <hr className="w-1/2 border-black text-lg" />
+            <b>or</b>
+            <hr className="w-1/2 border-black text-lg" />
           </div>
           <button
             className="btn-dark flex ite-center justify-center gap-4 w-[90%] center"

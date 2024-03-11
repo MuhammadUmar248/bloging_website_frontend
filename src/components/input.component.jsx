@@ -8,7 +8,7 @@ const InputBox = (name, id, value, icon) => {
   };
 
   return (
-    <div className="relative w-[100%] mb-4">
+    <div className="relative w-[100%] mb-4 ">
       <input
         name={name.name}
         type={

@@ -26,6 +26,7 @@ const AboutUser = ({ bio, social_links, joinedAt, className }) => {
           );
         })}
       </div>
+      <b>Join  Date :</b>
       <p className=" text-xl leading-7 text-dark-grey ">{getFullDay(joinedAt)}</p>
     </div>
   );

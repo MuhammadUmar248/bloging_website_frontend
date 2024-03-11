@@ -9,7 +9,6 @@ import LoadMoreDataBtn from "../components/load-more.component";
 import axios from "axios";
 import { filterPaginationData } from "../common/filter-pagination-data";
 import UserCard from "../components/usercard.component";
-// import User from "../../../server/Schema/User";
 
 const SearchPage = () => {
   let { query } = useParams();
@@ -18,10 +17,8 @@ const SearchPage = () => {
 
   const searchBlogs = ({ page = 1, create_new_arr = false }) => {
     axios
-      .post("http://localhost:3001" + "/search-blog", { query, page })
+      .post("http://localhost:3001/" + "/search-blog", { query, page })
       .then(async ({ data }) => {
-        // console.log("Data Blog is here", data.blogs);
-
         let formatData = await filterPaginationData({
           state: blogs,
           data: data.blogs,
@@ -31,7 +28,6 @@ const SearchPage = () => {
           create_new_arr,
         });
         setBlogs(formatData);
-        // console.log("formated Data", formatData);
       })
       .catch((error) => {
         console.log(error);
@@ -40,9 +36,8 @@ const SearchPage = () => {
 
   const fetchUsers = () => {
     axios
-      .post("http://localhost:3001" + "/search-users", { query })
+      .post("http://localhost:3001/" + "/search-users", { query })
       .then(({ data: users }) => {
-        // console.log("users here", users.user)
         setUsers(users.user);
       });
   };
@@ -59,7 +54,6 @@ const SearchPage = () => {
   };
 
   const UserCardWrapper = () => {
-    // console.log("users", users)
     return (
       <>
         {users == null ? (
@@ -116,7 +110,11 @@ const SearchPage = () => {
       </div>
 
       <div className=" min-w-[40%] lg:min-w-[350px] max-w-min border-1 border-grey pl-8 pt-3 max-md:hidden">
-        <h1 className=" font-medium text-xl mb-8"> User Related To Search <i className="fi fi-rr-user mt-1 ml-2 text-xl"></i> </h1>
+        <h1 className=" font-medium text-xl mb-8">
+          {" "}
+          User Related To Search{" "}
+          <i className="fi fi-rr-user mt-1 ml-2 text-xl"></i>{" "}
+        </h1>
         <UserCardWrapper />
       </div>
     </section>

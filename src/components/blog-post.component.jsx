@@ -20,25 +20,21 @@ const BlogPostCard = ({ content, author }) => {
       <div className=" w-full">
         <div className=" flex gap-2 item-center mb-7">
           <img src={profile_img} className=" w-6 h-6 rounded-full" />
-          <p className=" line-clamp-1">
+          <b className=" line-clamp-1">
             {fullname} @{username}
-          </p>
+          </b>
           <p className="min-w-fit"> {getDay(publishedAt)} </p>
         </div>
-        <h1 className=" bolg-title">{title}</h1>
+        <h3 className=" bolg-title">{title}</h3>
         <p className=" my-3 text-xl font-gelasio leading-7 max-sm:hidden md:max-[1100px]:hidden line-clamp-2:">
           {des}
         </p>
         <div className=" flex gap-4 mt-7">
-          <span className=" btn-light py-1 px-4 ">{tags[0]}</span>
-          <span className=" ml-3 flex items-center gap-2 text-dark-grey ">
-            <i className="fi fi-rr-heart text-xl "></i>
-            {total_likes}
-          </span>
+          <span className=" btn-light py-1 px-4 bg-gre hover:bg-lg border-grey">{tags[0]}</span>
         </div>
       </div>
 
-      <div className=" h-28 aspect-square bg-grey">
+      <div className=" h-28 aspect-square bg-gre">
         <img
           src={banner}
           className=" w-full h-full aspect-square object-cover"
