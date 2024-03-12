@@ -88,7 +88,7 @@ const PublishForm = () => {
     };
 
     axios
-      .post("http://localhost:3001" + "/create-blog", blogObj, {
+      .post(import.meta.env.VITE_SERVER_DOMAIN + "/create-blog", blogObj, {
         headers: {
           Authorization: `Bearer ${access_token}`,
         },

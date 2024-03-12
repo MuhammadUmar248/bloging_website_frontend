@@ -37,11 +37,10 @@ const BlogPage = () => {
 
   const fetchBlog = () => {
     axios
-      .post("http://localhost:3001" + "/get-blog", {
+      .post(import.meta.env.VITE_SERVER_DOMAIN + "/get-blog", {
         blog_id,
       })
       .then(({ data: { blog } }) => {
-        console.log(blog);
         setBlog(blog);
         setLoading(false);
       })
