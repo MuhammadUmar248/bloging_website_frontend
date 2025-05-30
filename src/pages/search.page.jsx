@@ -17,7 +17,7 @@ const SearchPage = () => {
 
   const searchBlogs = ({ page = 1, create_new_arr = false }) => {
     axios
-      .post("http://localhost:3001/search-blog", { query, page })
+      .post(import.meta.env.VITE_SERVER_DOMAIN + "/search-blog", { query, page })
       .then(async ({ data }) => {
         let formatData = await filterPaginationData({
           state: blogs,
@@ -36,7 +36,7 @@ const SearchPage = () => {
   
   const fetchUsers = () => {
     axios
-      .post("http://localhost:3001/search-users", { query })
+      .post(import.meta.env.VITE_SERVER_DOMAIN + "/search-users", { query })
       .then(({ data }) => {
         setUsers(data.users); // Changed from users.user to data.users
       })
